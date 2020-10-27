@@ -1,4 +1,4 @@
-# monster_hunter_world_wiki
+# Monster Hunter World Wiki Application
 
 ## Information
 
@@ -31,6 +31,14 @@
 ### Widgets
 - Define all common widget that has been used somewhere by any screen
 
-## Application Views
-### Dashboard
-### 
+## Application Views Structure
+```mermaid
+graph TD;
+    M[Main] --> C[Categories];
+    C --> G[General Informations];
+    C --> P[Player Infomartions];
+    C --> Cr[Crafting Informations];
+    C --> W[World Informations];
+    C --> Gu[Guide/Walkthrough];
+    G --> Ctr[Controls];
+```
