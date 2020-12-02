@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppDatabase {
@@ -48,17 +49,35 @@ class AppDatabase {
   }
 
   Future _openDatabase() async {
-    // get the application documents directory
-    final appDocumentDir = await getApplicationDocumentsDirectory();
+    var databasesPath = await getDatabasesPath();
+    var path = join(databasesPath, "mhw.db");
 
-    // make sure it exists
-    await appDocumentDir.create(recursive: true);
+    // Check if the database exists
+    var exists = await databaseExists(path);
 
-    // build the database path
-    final dbPath = join(appDocumentDir.path, 'mhw.db');
+    if (!exists) {
+      // Should happen only the first time you launch your application
+      print("Creating new copy from asset");
+
+      // Make sure the parent directory exists
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
+
+      // Copy from asset
+      ByteData data = await rootBundle.load(join("assets", "database/mhw.db"));
+      List<int> bytes =
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+      // Write and flush the bytes written
+      await File(path).writeAsBytes(bytes, flush: true);
+    } else {
+      print("Opening existing database");
+    }
 
     // open the database
-    final database = await openDatabase(dbPath);
+    final database = await openDatabase(path, readOnly: true);
+
     return _dbOpenCompleter.complete(database);
   }
 }

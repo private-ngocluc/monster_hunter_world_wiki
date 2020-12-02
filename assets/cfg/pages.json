@@ -1,0 +1,37 @@
+[
+    {
+        "name": "controls",
+        "icon": "controls",
+        "active": true,
+        "level": 1,
+        "parent": ""
+    },
+    {
+        "name": "monsters",
+        "icon": "monsters",
+        "active": true,
+        "level": 1,
+        "parent": ""
+    },
+    {
+        "name": "world",
+        "icon": "world",
+        "active": true,
+        "level": 1,
+        "parent": ""
+    },
+    {
+        "name": "monster_list",
+        "icon": "monster_list",
+        "active": true,
+        "level": 2,
+        "parent": "monsters"
+    },
+    {
+        "name": "monster_detail",
+        "icon": "monster_detail",
+        "active": true,
+        "level": 3,
+        "parent": "monster_list"
+    }
+]

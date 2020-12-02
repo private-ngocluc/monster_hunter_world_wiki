@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monster_hunter_world_wiki/utils/routes/routes.dart';
 
 class DashBoardScreen extends StatefulWidget {
   DashBoardScreen({Key key}) : super(key: key);
@@ -55,7 +56,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 textColor: Colors.white,
                 child: new Text("Monsters"),
                 splashColor: Colors.redAccent,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, monsterListRoute);
+                },
               ),
             ),
           ],

@@ -7,7 +7,7 @@ part of 'base_model.dart';
 // **************************************************************************
 
 BaseModel _$BaseModelFromJson(Map<String, dynamic> json) {
-  return BaseModel();
+  return null;
 }
 
 Map<String, dynamic> _$BaseModelToJson(BaseModel instance) =>
