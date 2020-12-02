@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monster_hunter_world_wiki/data/daos/monsters_dao.dart';
 import 'package:monster_hunter_world_wiki/models/models.dart';
+import 'package:monster_hunter_world_wiki/utils/routes/routes.dart';
 
 class MonsterListScreen extends StatefulWidget {
   MonsterListScreen({Key key}) : super(key: key);
@@ -35,12 +36,16 @@ class _MonsterListScreenState extends State<MonsterListScreen> {
     return ListView.builder(
       itemCount: datas.length,
       itemBuilder: (context, index) {
-        return Container(
-          child: Row(
-            children: [
-              renderMonsterImg(datas[index].id),
-              renderMonsterName(datas[index].name)
-            ],
+        return InkWell(
+          onTap: () =>
+              Navigator.pushReplacementNamed(context, monsterDetailRoute),
+          child: Container(
+            child: Row(
+              children: [
+                renderMonsterImg(datas[index].id),
+                renderMonsterName(datas[index].name)
+              ],
+            ),
           ),
         );
       },

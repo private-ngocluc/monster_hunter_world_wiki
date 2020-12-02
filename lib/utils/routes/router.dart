@@ -10,6 +10,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => DashBoardScreen());
       case monsterListRoute:
         return MaterialPageRoute(builder: (_) => MonsterListScreen());
+      case monsterDetailRoute:
+        return MaterialPageRoute(builder: (_) => MonsterDetailScreen());
+
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
