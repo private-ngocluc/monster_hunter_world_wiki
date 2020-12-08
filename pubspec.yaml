@@ -50,6 +50,5 @@ flutter:
   assets:
     - assets/images/
     - assets/images/monsters/
-    - assets/thumbnails/
     - assets/cfg/
     - assets/database/

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monster_hunter_world_wiki/models/models.dart';
 import 'package:monster_hunter_world_wiki/utils/routes/routes.dart';
 import 'package:monster_hunter_world_wiki/views/dashboard.dart';
 import 'package:monster_hunter_world_wiki/views/views.dart';
@@ -11,7 +12,11 @@ class AppRouter {
       case monsterListRoute:
         return MaterialPageRoute(builder: (_) => MonsterListScreen());
       case monsterDetailRoute:
-        return MaterialPageRoute(builder: (_) => MonsterDetailScreen());
+        final Monster args = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => MonsterDetailScreen(
+                  monster: args,
+                ));
 
       default:
         return MaterialPageRoute(

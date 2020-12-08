@@ -18,8 +18,7 @@ class _MonsterListScreenState extends State<MonsterListScreen> {
     return Material(
       child: FutureBuilder<List<Monster>>(
         future: _getMonsterData(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Monster>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Monster>> snapshot) {
           if (snapshot.hasData) {
             return renderListMonsters(snapshot.data);
           } else {
@@ -37,8 +36,11 @@ class _MonsterListScreenState extends State<MonsterListScreen> {
       itemCount: datas.length,
       itemBuilder: (context, index) {
         return InkWell(
-          onTap: () =>
-              Navigator.pushReplacementNamed(context, monsterDetailRoute),
+          onTap: () => Navigator.pushReplacementNamed(
+            context,
+            monsterDetailRoute,
+            arguments: datas[index],
+          ),
           child: Container(
             child: Row(
               children: [

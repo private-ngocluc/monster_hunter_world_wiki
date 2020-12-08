@@ -18,7 +18,7 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
         child: Column(
           children: [
             renderHeader(widget.monster.id, widget.monster.name),
-            renderBody([widget.monster.description]),
+            Expanded(child: renderBody([widget.monster.description])),
           ],
         ),
       ),
@@ -26,14 +26,50 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
   }
 
   Widget renderHeader(int monsterID, String monsterName) {
-    return Column(
-      children: [],
+    return Row(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width / 3,
+          child: Image(
+            image: AssetImage('assets/images/monsters/$monsterID.png'),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            child: ListTile(
+              title: Text(
+                monsterName,
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 
   Widget renderBody(List<dynamic> bodyDatas) {
-    return Container(
-      child: Text('Monster info'),
+    return DefaultTabController(
+      length: bodyDatas.length,
+      child: ListView(
+        children: [
+          TabBar(
+            tabs: [
+              Tab(text: 'Information'),
+            ],
+          ),
+          TabBarView(
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(bodyDatas[0]),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
