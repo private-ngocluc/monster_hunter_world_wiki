@@ -18,7 +18,10 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
         child: Column(
           children: [
             renderHeader(widget.monster.id, widget.monster.name),
-            Expanded(child: renderBody([widget.monster.description])),
+            Expanded(
+                child: renderBody([
+              {'description': widget.monster.description}
+            ])),
           ],
         ),
       ),
@@ -51,25 +54,37 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
   Widget renderBody(List<dynamic> bodyDatas) {
     return DefaultTabController(
       length: bodyDatas.length,
-      child: ListView(
-        children: [
-          TabBar(
-            tabs: [
-              Tab(text: 'Information'),
-            ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.brown,
+          elevation: 0,
+          bottom: TabBar(
+            tabs: bodyDatas.map((data) {
+              return Tab(
+                text: data.keys.elementAt(0),
+              );
+            }).toList(),
           ),
-          TabBarView(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(bodyDatas[0]),
-                ),
-              )
-            ],
-          ),
-        ],
+        ),
+        body: TabBarView(
+          children: bodyDatas.map((data) {
+            return buildChildTabContent(data);
+          }).toList(),
+        ),
       ),
     );
+  }
+
+  Widget buildChildTabContent(Map<String, dynamic> tabDatas) {
+    var tabName = tabDatas.keys.elementAt(0);
+    if (tabName == 'description') {
+      return buildDescriptionTab(tabDatas[tabName]);
+    } else {
+      return Container(child: Text('No Datas'));
+    }
+  }
+
+  Widget buildDescriptionTab(String description) {
+    return Container(child: Text(description));
   }
 }

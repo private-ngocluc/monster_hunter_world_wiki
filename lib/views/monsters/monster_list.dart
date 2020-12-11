@@ -18,7 +18,8 @@ class _MonsterListScreenState extends State<MonsterListScreen> {
     return Material(
       child: FutureBuilder<List<Monster>>(
         future: _getMonsterData(),
-        builder: (BuildContext context, AsyncSnapshot<List<Monster>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Monster>> snapshot) {
           if (snapshot.hasData) {
             return renderListMonsters(snapshot.data);
           } else {
@@ -45,7 +46,7 @@ class _MonsterListScreenState extends State<MonsterListScreen> {
             child: Row(
               children: [
                 renderMonsterImg(datas[index].id),
-                renderMonsterName(datas[index].name)
+                renderMonsterName(datas[index].name, datas[index].ecology)
               ],
             ),
           ),
@@ -63,13 +64,17 @@ class _MonsterListScreenState extends State<MonsterListScreen> {
     );
   }
 
-  Widget renderMonsterName(String name) {
+  Widget renderMonsterName(String name, String ecology) {
     return Container(
       width: MediaQuery.of(context).size.width * 2 / 3,
       child: ListTile(
         title: Text(
           name,
           style: TextStyle(fontSize: 16.0),
+        ),
+        subtitle: Text(
+          ecology ?? 'No ecology',
+          style: TextStyle(fontSize: 13, color: Colors.grey),
         ),
       ),
     );

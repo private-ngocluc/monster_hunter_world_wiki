@@ -24,11 +24,11 @@ class MonsterDAO extends BaseDAO<Monster> {
   Future<List<Monster>> getAllSortedByName() async {
     Database db = await _db;
     List<Map> results = await db.rawQuery("""
-          SELECT mon.id, mt.name, mt.description, mon.size
+          SELECT mon.id, mt.name, mt.description, mon.size, mt.ecology
 		      FROM monster as mon
           LEFT JOIN monster_text AS mt ON mon.id = mt.id
           LEFT JOIN language AS la ON mt.lang_id = la.id
-          WHERE mt.lang_id = 'en' and mon.size = 'large'
+          WHERE mt.lang_id = 'en' AND mon.size = 'large'
                            """);
 
     return results.map((monsterData) {
