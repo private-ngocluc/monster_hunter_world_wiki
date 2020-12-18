@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:monster_hunter_world_wiki/data/daos/monsters_dao.dart';
-import 'package:monster_hunter_world_wiki/models/models.dart';
-import 'package:monster_hunter_world_wiki/utils/routes/routes.dart';
+part of '../views.dart';
 
 class MonsterListScreen extends StatefulWidget {
   MonsterListScreen({Key key}) : super(key: key);

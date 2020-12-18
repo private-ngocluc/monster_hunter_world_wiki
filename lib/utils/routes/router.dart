@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:monster_hunter_world_wiki/models/models.dart';
-import 'package:monster_hunter_world_wiki/utils/routes/routes.dart';
-import 'package:monster_hunter_world_wiki/views/dashboard.dart';
-import 'package:monster_hunter_world_wiki/views/views.dart';
+part of '../utils.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {

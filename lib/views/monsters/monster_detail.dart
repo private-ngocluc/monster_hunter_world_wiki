@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:monster_hunter_world_wiki/models/models.dart';
+part of '../views.dart';
 
 class MonsterDetailScreen extends StatefulWidget {
   final Monster monster;

@@ -1,6 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'base_model.g.dart';
+part of 'models.dart';
 
 @JsonSerializable()
 abstract class BaseModel {

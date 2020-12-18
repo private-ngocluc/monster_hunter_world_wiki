@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:monster_hunter_world_wiki/utils/utils.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GlobalConfiguration().loadFromAsset('app_settings');
   runApp(MyApp());
 }
 

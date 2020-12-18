@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:monster_hunter_world_wiki/utils/routes/routes.dart';
+part of './views.dart';
 
 class DashBoardScreen extends StatefulWidget {
   DashBoardScreen({Key key}) : super(key: key);

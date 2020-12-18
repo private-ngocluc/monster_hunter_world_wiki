@@ -1,4 +1,4 @@
-import 'package:monster_hunter_world_wiki/models/base_model.dart';
+part of 'daos.dart';
 
 abstract class BaseDAO<T extends BaseModel> {
   // * Fetch

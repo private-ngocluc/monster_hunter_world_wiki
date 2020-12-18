@@ -1,7 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:monster_hunter_world_wiki/models/models.dart';
-
-part 'monster.g.dart';
+part of 'models.dart';
 
 @JsonSerializable()
 class Monster extends BaseModel {

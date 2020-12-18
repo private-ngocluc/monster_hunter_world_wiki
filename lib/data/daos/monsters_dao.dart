@@ -1,10 +1,8 @@
-import 'package:monster_hunter_world_wiki/data/app_database.dart';
-import 'package:monster_hunter_world_wiki/data/daos/base_dao.dart';
-import 'package:monster_hunter_world_wiki/models/models.dart';
-import 'package:sqflite/sqflite.dart';
+part of 'daos.dart';
 
 class MonsterDAO extends BaseDAO<Monster> {
   Future<Database> get _db async => await AppDatabase.instance.database;
+  final config = GlobalConfiguration();
 
   @override
   Future delete(Monster record) {
@@ -23,12 +21,13 @@ class MonsterDAO extends BaseDAO<Monster> {
   @override
   Future<List<Monster>> getAllSortedByName() async {
     Database db = await _db;
+    final lang = config.getValue('lang');
     List<Map> results = await db.rawQuery("""
           SELECT mon.id, mt.name, mt.description, mon.size, mt.ecology
 		      FROM monster as mon
           LEFT JOIN monster_text AS mt ON mon.id = mt.id
           LEFT JOIN language AS la ON mt.lang_id = la.id
-          WHERE mt.lang_id = 'en' AND mon.size = 'large'
+          WHERE mt.lang_id = '$lang' AND mon.size = 'large'
                            """);
 
     return results.map((monsterData) {
