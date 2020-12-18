@@ -23,11 +23,26 @@ class MonsterDAO extends BaseDAO<Monster> {
     Database db = await _db;
     final lang = config.getValue('lang');
     List<Map> results = await db.rawQuery("""
-          SELECT mon.id, mt.name, mt.description, mon.size, mt.ecology
-		      FROM monster as mon
-          LEFT JOIN monster_text AS mt ON mon.id = mt.id
-          LEFT JOIN language AS la ON mt.lang_id = la.id
-          WHERE mt.lang_id = '$lang' AND mon.size = 'large'
+        SELECT
+          mon.id,
+          mt.name,
+          mt.description,
+          mon.size,
+          mt.ecology,
+          mon.weakness_fire,
+          mon.weakness_blast,
+          mon.weakness_dragon,
+          mon.weakness_ice,
+          mon.weakness_paralysis,
+          mon.weakness_poison,
+          mon.weakness_sleep,
+          mon.weakness_stun,
+          mon.weakness_thunder,
+          mon.weakness_water
+        FROM monster as mon
+        LEFT JOIN monster_text AS mt ON mon.id = mt.id
+        LEFT JOIN language AS la ON mt.lang_id = la.id
+        WHERE la.id = '$lang' AND mon.size = 'large'
                            """);
 
     return results.map((monsterData) {
