@@ -81,17 +81,18 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
 
   Widget buildSummaryTab() {
     final weaknessDatas = [
-      ['Fire', widget.monster.weaknessFire],
-      ['Water', widget.monster.weaknessWater],
-      ['Blast', widget.monster.weaknessBlast],
-      ['Dragon', widget.monster.weaknessDragon],
-      ['Ice', widget.monster.weaknessIce],
-      ['Paralysis', widget.monster.weaknessParalysis],
-      ['Poison', widget.monster.weaknessPoison],
-      ['Sleep', widget.monster.weaknessSleep],
-      ['Stun', widget.monster.weaknessStun],
-      ['Thunder', widget.monster.weaknessThunder],
+      ['Fire', 'element', widget.monster.weaknessFire],
+      ['Dragon', 'element', widget.monster.weaknessDragon],
+      ['Ice', 'element', widget.monster.weaknessIce],
+      ['Thunder', 'element', widget.monster.weaknessThunder],
+      ['Water', 'element', widget.monster.weaknessWater],
+      ['Blast', 'status', widget.monster.weaknessBlast],
+      ['Paralysis', 'status', widget.monster.weaknessParalysis],
+      ['Poison', 'status', widget.monster.weaknessPoison],
+      ['Sleep', 'status', widget.monster.weaknessSleep],
+      ['Stun', 'status', widget.monster.weaknessStun],
     ];
+
     //Summary Tab:
     // --> Monster Descriptions
     // ------------------------------
@@ -100,7 +101,7 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+          padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 20.0),
           child: Container(child: Text(widget.monster.description)),
         ),
         DottedLine(),
@@ -108,14 +109,26 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
           child: ListView.builder(
             itemCount: weaknessDatas.length,
             itemBuilder: (context, index) {
-              return Container(
-                child: Row(
-                  children: [
-                    Text(weaknessDatas[index][0]),
-                    renderWeaknessValue(
-                        weaknessDatas[index][0], weaknessDatas[index][1]),
-                  ],
-                ),
+              return Column(
+                children: [
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          child: Text(
+                            weaknessDatas[index][0],
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        ),
+                        Expanded(
+                          child: renderWeaknessValue(weaknessDatas[index]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  DottedLine(),
+                ],
               );
             },
           ),
@@ -124,15 +137,18 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
     );
   }
 
-  Widget renderWeaknessValue(String name, int value) {
+  Widget renderWeaknessValue(List<dynamic> weakness) {
     return Row(
-        children: new List.generate(
-            value,
-            (index) => Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: Image(
-                    image: AssetImage('assets/images/ui/ic_element_dragon.svg'),
-                  ),
-                )));
+      children: new List.generate(
+        weakness[2],
+        (index) => Container(
+          child: Image(
+            image: AssetImage(
+                'assets/images/ui/ic_${weakness[1] == 'element' ? 'element' : 'status'}_${weakness[0].toLowerCase()}.png'),
+            height: 25.0,
+          ),
+        ),
+      ),
+    );
   }
 }

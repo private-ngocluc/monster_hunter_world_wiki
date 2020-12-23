@@ -52,5 +52,11 @@ flutter:
   assets:
     - assets/images/
     - assets/images/monsters/
+    - assets/images/ui/
+    - assets/images/dashboard/
+    - assets/images/equipments/
+    - assets/images/general/
+    - assets/images/items/
+    - assets/images/locations/
     - assets/cfg/
     - assets/database/
