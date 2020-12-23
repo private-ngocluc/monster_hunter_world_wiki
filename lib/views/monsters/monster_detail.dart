@@ -80,6 +80,55 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
   }
 
   Widget buildSummaryTab() {
-    return Container(child: Text(widget.monster.description));
+    final weaknessDatas = [
+      ['Fire', widget.monster.weaknessFire],
+      ['Water', widget.monster.weaknessWater],
+      ['Blast', widget.monster.weaknessBlast],
+      ['Dragon', widget.monster.weaknessDragon],
+      ['Ice', widget.monster.weaknessIce],
+      ['Paralysis', widget.monster.weaknessParalysis],
+      ['Poison', widget.monster.weaknessPoison],
+      ['Sleep', widget.monster.weaknessSleep],
+      ['Stun', widget.monster.weaknessStun],
+      ['Thunder', widget.monster.weaknessThunder],
+    ];
+    //Summary Tab:
+    // --> Monster Descriptions
+    // ------------------------------
+    // --> Monster Weakness (List)
+    // -----> Weakness name : Weakness Img * Monster Weakness number
+    return Column(
+      children: [
+        Container(child: Text(widget.monster.description)),
+        DottedLine(),
+        ListView.builder(
+          itemCount: weaknessDatas.length,
+          itemBuilder: (context, index) {
+            return Container(
+              child: Row(
+                children: [
+                  Text(weaknessDatas[index][0]),
+                  renderWeaknessValue(
+                      weaknessDatas[index][0], weaknessDatas[index][1]),
+                ],
+              ),
+            );
+          },
+        )
+      ],
+    );
+  }
+
+  Widget renderWeaknessValue(String name, int value) {
+    return Row(
+        children: new List.generate(
+            value,
+            (index) => Container(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Image(
+                    image: AssetImage(
+                        'assets/images/ui/ic_element_${name.toLowerCase()}.svg'),
+                  ),
+                )));
   }
 }
