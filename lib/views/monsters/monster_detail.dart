@@ -99,21 +99,26 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
     // -----> Weakness name : Weakness Img * Monster Weakness number
     return Column(
       children: [
-        Container(child: Text(widget.monster.description)),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+          child: Container(child: Text(widget.monster.description)),
+        ),
         DottedLine(),
-        ListView.builder(
-          itemCount: weaknessDatas.length,
-          itemBuilder: (context, index) {
-            return Container(
-              child: Row(
-                children: [
-                  Text(weaknessDatas[index][0]),
-                  renderWeaknessValue(
-                      weaknessDatas[index][0], weaknessDatas[index][1]),
-                ],
-              ),
-            );
-          },
+        Expanded(
+          child: ListView.builder(
+            itemCount: weaknessDatas.length,
+            itemBuilder: (context, index) {
+              return Container(
+                child: Row(
+                  children: [
+                    Text(weaknessDatas[index][0]),
+                    renderWeaknessValue(
+                        weaknessDatas[index][0], weaknessDatas[index][1]),
+                  ],
+                ),
+              );
+            },
+          ),
         )
       ],
     );
@@ -126,8 +131,7 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
             (index) => Container(
                   width: MediaQuery.of(context).size.width / 3,
                   child: Image(
-                    image: AssetImage(
-                        'assets/images/ui/ic_element_${name.toLowerCase()}.svg'),
+                    image: AssetImage('assets/images/ui/ic_element_dragon.svg'),
                   ),
                 )));
   }
