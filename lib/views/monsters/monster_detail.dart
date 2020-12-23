@@ -16,31 +16,29 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            renderHeader(widget.monster.id, widget.monster.name),
-            Expanded(
-                child: renderBody([
-              {'description': widget.monster.description}
-            ])),
+            renderHeader(),
+            Expanded(child: renderBody()),
           ],
         ),
       ),
     );
   }
 
-  Widget renderHeader(int monsterID, String monsterName) {
+  Widget renderHeader() {
     return Row(
       children: [
         Container(
           width: MediaQuery.of(context).size.width / 3,
           child: Image(
-            image: AssetImage('assets/images/monsters/$monsterID.png'),
+            image:
+                AssetImage('assets/images/monsters/${widget.monster.id}.png'),
           ),
         ),
         Expanded(
           child: Container(
             child: ListTile(
               title: Text(
-                monsterName,
+                widget.monster.name,
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
@@ -50,40 +48,38 @@ class _MonsterDetailScreenState extends State<MonsterDetailScreen> {
     );
   }
 
-  Widget renderBody(List<dynamic> bodyDatas) {
+  Widget renderBody() {
+    final dataTables = ['Summary'];
     return DefaultTabController(
-      length: bodyDatas.length,
+      length: dataTables.length,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.brown,
           elevation: 0,
           bottom: TabBar(
-            tabs: bodyDatas.map((data) {
-              return Tab(
-                text: data.keys.elementAt(0),
-              );
+            tabs: dataTables.map((data) {
+              return Tab(text: data);
             }).toList(),
           ),
         ),
         body: TabBarView(
-          children: bodyDatas.map((data) {
-            return buildChildTabContent(data);
+          children: dataTables.map((tableName) {
+            return buildChildTabContent(tableName);
           }).toList(),
         ),
       ),
     );
   }
 
-  Widget buildChildTabContent(Map<String, dynamic> tabDatas) {
-    var tabName = tabDatas.keys.elementAt(0);
-    if (tabName == 'description') {
-      return buildDescriptionTab(tabDatas[tabName]);
+  Widget buildChildTabContent(String tabName) {
+    if (tabName == 'Summary') {
+      return buildSummaryTab();
     } else {
       return Container(child: Text('No Datas'));
     }
   }
 
-  Widget buildDescriptionTab(String description) {
-    return Container(child: Text(description));
+  Widget buildSummaryTab() {
+    return Container(child: Text(widget.monster.description));
   }
 }
