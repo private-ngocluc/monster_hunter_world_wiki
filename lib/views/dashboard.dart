@@ -25,8 +25,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             Container(
               margin: EdgeInsets.all(15),
               child: new MaterialButton(
-                height: 100.0,
-                minWidth: 150.0,
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 child: new Text("Controls"),
@@ -37,8 +35,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             Container(
               margin: EdgeInsets.all(15),
               child: new MaterialButton(
-                height: 100.0,
-                minWidth: 150.0,
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 child: new Text("World"),
@@ -47,18 +43,46 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(15),
-              child: new MaterialButton(
-                height: 100.0,
-                minWidth: 150.0,
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
-                child: new Text("Monsters"),
-                splashColor: Colors.redAccent,
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, monsterListRoute);
-                },
-              ),
+              margin: EdgeInsets.all(15.0),
+              child: GestureDetector(
+                  child: Container(
+                      padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+                      decoration: BoxDecoration(
+                        color: Colors.blueGrey[200],
+                        image: DecorationImage(
+                            image: AssetImage(
+                                "assets/images/ui/ic_ui_elderseal.png"),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Center(
+                          child: Stack(
+                        children: <Widget>[
+                          // Stroked text as border.
+                          Text(
+                            'Monsters',
+                            style: TextStyle(
+                              fontSize: 14,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 3
+                                ..color = Colors.black,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          // Solid text as fill.
+                          Text(
+                            'Monsters',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.yellow[800],
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ],
+                      ))),
+                  onTap: () {
+                    Navigator.pushNamed(context, monsterListRoute);
+                  }),
             ),
           ],
         ),
